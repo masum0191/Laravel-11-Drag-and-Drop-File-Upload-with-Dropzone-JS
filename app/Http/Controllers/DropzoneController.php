@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\JsonResponse;
 use App\Models\Image;
- 
+use Illuminate\Support\Facades\Session;
+
 class DropzoneController extends Controller
 {
     /**
@@ -50,7 +51,10 @@ class DropzoneController extends Controller
         foreach ($images as $imageData) {
             Image::create($imageData);
         }
-     
-        return response()->json(['success'=>$images]);
+     // Set flash 
+      return response()->json(['success' => true, 'message' => 'Images uploaded successfully.']);
+
+        //  Session::flash('success', 'Images uploaded successfully.');
+        // return response()->json(['success'=>$images]);
     }
 }
